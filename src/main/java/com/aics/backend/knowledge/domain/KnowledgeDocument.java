@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * RAG 인덱싱 대상 문서를 나타냅니다.
+ * 저장된 문서는 이후 AI 검색/응답에 활용될 수 있습니다.
+ */
 @Entity
 @Table(name = "knowledge_documents")
 @Getter

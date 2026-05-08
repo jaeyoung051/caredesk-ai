@@ -19,6 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 상담 대화의 핵심 흐름을 담당합니다.
+ *
+ * 사용자 메시지 저장 → AI 응답 생성 → AI 메시지 저장 → 상담원 전환 상태 변경 흐름을 관리합니다.
+ * 현재 AI 응답은 FastAPI 서버 준비 전 MockAiClient를 사용합니다.
+ */
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -27,6 +33,21 @@ public class ConversationService {
     private final ConversationMessageRepository conversationMessageRepository;
     private final MockAiClient mockAiClient;
 
+
+    /**
+     * 고객 메시지를 받아 상담 응답을 생성한다.
+     *
+     * conversationId가 null이면 새 상담방을 생성하고,
+     * conversationId가 존재하면 해당 상담방에 메시지를 이어서 저장한다.
+     *
+     * tenantId가 다른 상담방에 접근하는 것을 막기 위해 tenantId 검증을 수행한다.
+     */
+    /**
+     * 사용자 메시지를 받아 상담 흐름을 처리합니다.
+     *
+     * 새로운 conversationId가 없으면 새 상담방을 만들고,
+     * 있으면 기존 상담방에 메시지를 추가합니다.
+     */
     public ChatResponse chat(Long tenantId, ChatRequest request) {
         // Step 1: Get or create conversation
         Conversation conversation;
@@ -97,6 +118,10 @@ public class ConversationService {
     }
 
     @Transactional(readOnly = true)
+    /**
+     * 상담방의 메시지 히스토리를 조회합니다.
+     * tenantId 검증을 통해 다른 테넌트 접근을 방지합니다.
+     */
     public ConversationDetailResponse getConversationDetail(Long tenantId, Long conversationId) {
         Conversation conversation = conversationRepository.findById(conversationId)
                 .orElseThrow(() -> new IllegalArgumentException("Conversation not found: " + conversationId));

@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * 상담방을 나타내는 도메인입니다.
+ * Conversation은 사용자와 AI/상담원이 주고받는 대화의 단위입니다.
+ */
 @Entity
 @Table(name = "conversations")
 @Getter

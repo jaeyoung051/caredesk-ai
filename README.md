@@ -1,5 +1,11 @@
 # AI Customer Support SaaS - Backend
 
+현재 백엔드 구현 상태:
+- Spring Boot 기반 AI 고객상담 백엔드 기본 구조가 완료되었습니다.
+- Knowledge 문서 저장/조회, Conversation 채팅 저장/조회 기능이 구현되어 있습니다.
+- 실제 FastAPI RAG/Agent 서버는 아직 준비되지 않아 현재 MockAiClient로 동작합니다.
+- FastAPI 준비 완료 시 MockAiClient를 AiFastApiClient 또는 AiService로 교체할 예정입니다.
+
 Spring Boot 기반의 AI 고객상담 자동화 SaaS 백엔드입니다.
 
 ## 프로젝트 구조
@@ -166,6 +172,12 @@ curl -X POST http://localhost:8081/api/tenants/1/conversations/chat \
 # 대화 상세 조회
 curl -X GET http://localhost:8081/api/tenants/1/conversations/1
 ```
+
+### 테스트 API 예시
+- `POST /api/tenants/{tenantId}/knowledge`
+- `POST /api/tenants/{tenantId}/conversations/chat`
+- `GET /api/tenants/{tenantId}/knowledge`
+- `GET /api/tenants/{tenantId}/conversations/{conversationId}`
 
 ## 설계 원칙
 

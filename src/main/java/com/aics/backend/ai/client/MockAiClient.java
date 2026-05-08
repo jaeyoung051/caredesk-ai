@@ -7,17 +7,16 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 
 /**
- * Mock AI Client for testing without FastAPI server
- * This client returns predefined test responses and doesn't call the actual FastAPI server.
- * When the FastAPI server is ready, replace this with calls to AiFastApiClient.
+ * 현재 FastAPI RAG/Agent 서버가 준비되지 않아 사용하는 Mock AI 클라이언트입니다.
+ * 실제 서버가 준비되면 AiFastApiClient 또는 AiService로 교체할 예정입니다.
  */
 @Component
 public class MockAiClient {
 
     /**
-     * Mock RAG question answering
-     * @param request AI RAG ask request containing question and other parameters
-     * @return Mock response with test answer and metadata
+     * Mock RAG 질문 응답을 생성합니다.
+     * @param request AI RAG 요청 정보
+     * @return 테스트용 답변과 메타데이터
      */
     public AiRagAskResponse ask(AiRagAskRequest request) {
         return new AiRagAskResponse(
